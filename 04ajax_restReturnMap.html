@@ -13,11 +13,17 @@
 </head>
 <body>
     <script>
-       $.get("http://localhost:8080/ws/organization",function(data){
+    //    $.get("http://localhost:8080/ws/organization",function(data){
+    //        $.map(data,function(key,value){
+    //            alert(key+":"+value);
+    //        })
+    //    })
+       $.get("http://springboot190814-hjqhg.run.goorm.io/ws/organization",function(data){
            $.map(data,function(key,value){
                alert(key+":"+value);
            })
        })
+      
     </script>
 
 </body>
