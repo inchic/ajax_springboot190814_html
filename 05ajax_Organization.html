@@ -1,0 +1,51 @@
+<!-- https://github.com/minwoo21/test_springboot/blob/master/html/ajax_restReturnMap.html     -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <script>
+        $(function () {
+            $("button").click(function () {
+                $.get("http://localhost:8080/ws/organization", function (data) {
+                    $.map(data, function (key, value) {
+                        $(tbody1).append("<tr> <td>" + value + "</td> <td>" + key + "</td> </tr>");
+                        // $("tbody").append("<tr> <td>" + value + "</td> <td>" + key + "</td> </tr>");
+                        // tbody로 처리하는것보다, id를 지정해주고 그 id로 보내는 방법을 써야한다.
+
+                        //https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_html_append_ref
+                        //append 예제
+                    });
+                });
+            });
+        });
+    </script>
+    <button type="button">get</button>
+    <table class="table col-6">
+        <thead class="text-center">
+            <tr>
+                <th>OPTION</th>
+                <th>VALUE</th>
+            </tr>
+        </thead>
+
+        <tbody id="tbody1">
+            <!-- id처리 -->
+            <!-- append 안의 내용이 들어가는 자리  -->
+        </tbody>
+
+    </table>
+</body>
+
+</html>
