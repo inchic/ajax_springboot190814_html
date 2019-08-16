@@ -16,19 +16,25 @@
 <body>
 
     <script>
-
-        $.ajax({
-            type: "POST", contentType: "application/json",
-            url: "http://localhost:8080/api/ajax",
-            data: {
-                title: "Donald Duck", description: "Duckburg"
-            },
-            dataType: "json",
-            success: function (data, status) {
-                alert("Data: " + data + "\nStatus" + status);
-            }
+        $(function () {
+            $("button").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/api/ajax",
+                    data: {
+                        title: "Donald Duck", description: "Duckburg"
+                    },
+                    
+                    success: function (data, status) {
+                        alert("Data: " + data + "\nStatus" + status);
+                    }
+                    //datatype urltype을 빼줬더니 기능함
+                })
+            })
         })
+
     </script>
+    <button>버튼</button>
 
 
 

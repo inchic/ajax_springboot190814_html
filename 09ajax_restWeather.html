@@ -11,21 +11,24 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
 </head>
 
 <body>
+
     <script>
         $(function () {
             $("button").click(function () {
-                $.post("http://localhost:8080/api/post", function (data, status) {
-                    alert("Data: " + typeof data + "\nStataus: " + status + "\n 내용" + data);
+                $.get("http://localhost:8080/remote/openweather", function (data, status) {
+                    alert(data);
                 })
             })
-        })    
+        })
+
     </script>
-    <button>Send an HTTP GET request</button>
-    <!-- 왜 안되냐 -->
+    <button>버튼</button>
+
+
+
 </body>
 
 </html>
