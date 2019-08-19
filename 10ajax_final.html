@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <script>
+
+   
+
+        var today = new Date();
+        var dd = "-" + today.getDate();
+        // document.write(dd);
+        $(function () {
+            $("button").click(function () {
+                $.get("http://localhost:8080/final", function (data, status) {
+                    $.each(data, function (key, val) {
+                        if (key == "list") {
+                            //map으로 묶여서 cod, message, cnt, list, city 중에 list
+                            $.each(val, function (key1, val1) {
+                                //list안은 list로 묶여서 [index num, data(=object)] 로 되어있다.
+                                //각각을 풀어주면
+
+                                if (key1 < 10) {
+                                    //10개의 정보만 가져온다
+
+                                    $.each(val1, function (key2, val2) {
+                                        //dt main weather clouds wind sys dt_txt 
+                                        // $(tbody1).append("<tr> <td>" + key2 + "</td> <td>" + val2 + "</td> </tr>");
+
+                                        //dt_txt
+                                        if (key2 == "dt_txt"){
+
+                                            var dt_txt = val2;
+                                            document.write("Time: " + dt_txt+" // ");
+                                            
+                                        }
+
+
+
+                                        //weather 분기
+                                        if (key2 == "weather") {
+                                            $.each(val2, function (key3, val3) {
+                                                // $(tbody1).append("<tr> <td>" + key3 + "</td> <td>" + val3 + "</td> </tr>");
+                                                //index=0, object로 들어있는데
+                                                $.each(val3, function (key4, val4) {
+                                                    // $(tbody1).append("<tr> <td>" + key4 + "</td> <td>" + val4 + "</td> </tr>");
+                                                    //id main description
+                                                    if (key4 == "main") {
+                                                        // $(tbody1).append("<tr> <td>" + key4 + "</td> <td>" + val4 + "</td> </tr>");
+                                                        var weatherMain = val4+" ";
+                                                        document.write("weather: " + weatherMain);
+
+                                                        // var array = new Array();
+                                                        // array.push(val4);
+                                                        // document.write(array+" // ");
+                                                    }
+                                                    
+                                                })
+
+                                            })
+                                        }
+
+
+                                        if(key2 == "main"){
+                                            $.each(val2, function (key3, val3){
+                                                // $(tbody1).append("<tr> <td>" + key3 + "</td> <td>" + val3 + "</td> </tr>");
+                                                if(key3 == "temp"){
+                                                    document.write("temp: "+val3+" ");
+                                                }
+                                                if(key3 == "humidity"){
+                                                    document.write("humidity: "+ val3+ " ");
+                                                }
+                                            })
+                                        }
+
+
+
+
+                                    })
+                                }
+
+
+
+
+                            })
+                        }
+
+
+                    })
+                })
+            })
+        })
+
+
+    </script>
+
+    <button type="button">get</button>
+    <table class="table col-6">
+        <thead class="text-center">
+            <tr>
+                <th>OPTION</th>
+                <th>VALUE</th>
+            </tr>
+        </thead>
+
+        <tbody id="tbody1">
+            <!-- id처리 -->
+            <!-- append 안의 내용이 들어가는 자리  -->
+        </tbody>
+
+    </table>
+</body>
+
+</html>

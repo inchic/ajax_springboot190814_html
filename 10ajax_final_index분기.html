@@ -15,23 +15,27 @@
 
 <body>
     <script>
+        var today = new Date();
+        var dd = "-" + today.getDate();
+        // document.write(dd);
         $(function () {
             $("button").click(function () {
-                $.get("http://localhost:8080/ws/restreturn", function (data, status) {
-                    $.each(data, function (index, currentData) {
-                        //data=[list {hashmap{key,value}#1},{hashmap#2}, ... ] 
-                        //첫번째 해쉬맵을 뽑아, 두번째해쉬맵을 뽑아 (=currentData)
-                        //each 명령어 사용
-                        
-                        $.each(currentData, function (key, val) {
-                            //뽑은 해쉬맵(=currentData에서 key와 value를 뽑아
+                $.get("http://localhost:8080/final", function (data, status) {
+                    $.each(data, function (key, val) {
+                        if (key == "list") {
+                            //map으로 묶여서 cod, message, cnt, list, city 중에 list
+                            $.each(val, function (key1, val1) {
+                                //list안은 list로 묶여서 [index num, data] 로 되어있다.
+                                //각각을 풀어주면
+                                if (key1 < 10) {
+                                    $(tbody1).append("<tr> <td>" + key1 + "</td> <td>" + val1 + "</td> </tr>");
+                                }
 
 
-                            // alert(key + ":" + val);
-                            $(tbody1).append("<tr> <td>" + key + "</td> <td>" + val + "</td> </tr>");
+                            })
+                        }
 
-                            
-                        })
+
                     })
                 })
             })
